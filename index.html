@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Menu Kafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kafe Informatika</h1>
+        <p>Sajian Nikmat Penambah Semangat Ngoding</p>
+    </header>
+
+    <nav>
+        <div class="filter-buttons">
+            <button class="btn-filter active" data-filter="semua">Semua Menu</button>
+            <button class="btn-filter" data-filter="makanan">Makanan</button>
+            <button class="btn-filter" data-filter="minuman">Minuman</button>
+        </div>
+        <!-- Tautan internal -->
+        <a href="#ringkasan-pesanan" class="link-pesanan">Lihat Keranjang Pesanan</a>
+    </nav>
+
+    <main>
+        <!-- Section 1: Daftar Menu -->
+        <section id="daftar-menu" class="menu-grid">
+
+            <!-- Kartu Menu 1 -->
+            <article class="kartu-menu" data-kategori="makanan" data-harga="25000">
+                <h3>Nasi Goreng Bug</h3>
+                <p>Nasi goreng pedas dengan telur mata sapi dan ayam suwir.</p>
+                <button class="btn-pesan">Pesan Sekarang</button>
+            </article>
+
+            <!-- Kartu Menu 2 -->
+            <article class="kartu-menu" data-kategori="makanan" data-harga="20000">
+                <h3>Mie Rebus Array</h3>
+                <p>Mie rebus kuah gurih dengan sayuran segar dan sosis.</p>
+                <button class="btn-pesan">Pesan Sekarang</button>
+            </article>
+
+            <!-- Kartu Menu 3 -->
+            <article class="kartu-menu" data-kategori="minuman" data-harga="18000">
+                <h3>Kopi Susu Looping</h3>
+                <p>Kopi espresso arabika dipadukan dengan susu segar dan gula aren.</p>
+                <button class="btn-pesan">Pesan Sekarang</button>
+            </article>
+
+            <!-- Kartu Menu 4 -->
+            <article class="kartu-menu" data-kategori="minuman" data-harga="10000">
+                <h3>Es Teh Variabel</h3>
+                <p>Teh melati manis yang disajikan dingin untuk melepas dahaga.</p>
+                <button class="btn-pesan">Pesan Sekarang</button>
+            </article>
+
+        </section>
+
+        <hr>
+
+        <!-- Section 2: Ringkasan Pesanan -->
+        <section id="ringkasan-pesanan" class="pesanan-container">
+            <h2>Ringkasan Pesanan</h2>
+            <div class="box-pesanan">
+                <p>Jumlah Item: <strong id="jumlah-item">0</strong> porsi</p>
+                <p>Total Harga: <strong id="total-harga">Rp 0</strong></p>
+                <button id="btn-reset">Kosongkan Pesanan</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kafe Informatika. Dibuat untuk Ujian Praktik Pemrograman Web Dasar.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
