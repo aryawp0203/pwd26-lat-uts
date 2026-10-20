@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kedai Kopi Senja</title>
+    <style>
+        /* =========================================
+           1. KETENTUAN CSS (PALET WARNA & TIPOGRAFI) 
+           ========================================= */
+        :root {
+            --cokelat-tua: #4a2c1a;
+            /* header dan panel pesanan */
+            --krem: #faf5ee;
+            /* latar halaman */
+            --krem-tua: #efe0cb;
+            /* bagian pengantar */
+            --cokelat-aksen: #b5651d;
+            /* harga dan tombol filter */
+            --cokelat-gelap: #2a1b10;
+            /* footer */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--krem);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* TATA HEADER DENGAN FLEXBOX */
+        header {
+            background-color: var(--cokelat-tua);
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Ukuran huruf berbeda untuk nama kedai */
+        header .brand h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        header .brand p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: var(--cokelat-aksen);
+        }
+
+        /* SECTION 1: PENGANTAR */
+        .pengantar {
+            background-color: var(--krem-tua);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        /* Ukuran huruf berbeda untuk judul bagian */
+        .pengantar h2 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            color: var(--cokelat-tua);
+            font-weight: 700;
+        }
+
+        .pengantar p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--cokelat-tua);
+        }
+
+        /* SECTION 2: DAFTAR MENU */
+        .daftar-menu {
+            padding: 40px 5%;
+        }
+
+        .filter-container {
+            margin-bottom: 30px;
+        }
+
+        .btn-filter {
+            background-color: transparent;
+            color: var(--cokelat-tua);
+            border: 2px solid var(--cokelat-aksen);
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-filter.active,
+        .btn-filter:hover {
+            background-color: var(--cokelat-aksen);
+            color: white;
+        }
+
+        /* KARTU MENU DALAM GRID 3 KOLOM */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            /* Jarak seragam */
+        }
+
+        /* Margin, padding, border, dan border-radius pada kartu */
+        .kartu-menu {
+            background-color: white;
+            border: 1px solid #e0d5c1;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label-kategori {
+            background-color: var(--krem-tua);
+            color: var(--cokelat-tua);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 6px;
+            align-self: flex-start;
+            margin-bottom: 15px;
+        }
+
+        /* Ukuran huruf berbeda untuk nama menu */
+        .kartu-menu h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: var(--cokelat-tua);
+            font-weight: 700;
+        }
+
+        .kartu-menu p {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 20px 0;
+            flex-grow: 1;
+            /* Mendorong harga dan tombol ke bawah */
+        }
+
+        /* Ukuran huruf berbeda untuk harga */
+        .kartu-menu .harga {
+            display: block;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--cokelat-aksen);
+            margin-bottom: 15px;
+        }
+
+        .btn-pesan {
+            background-color: var(--cokelat-tua);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-pesan:hover {
+            background-color: var(--cokelat-aksen);
+        }
+
+        /* SECTION 3: PANEL RINGKASAN PESANAN (3 Bagian Sejajar) */
+        .ringkasan-pesanan {
+            background-color: var(--cokelat-tua);
+            color: white;
+            margin: 0 5% 50px 5%;
+            padding: 25px 40px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            /* Membuat 3 bagian sejajar */
+            align-items: center;
+        }
+
+        .pesanan-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+
+        .pesanan-info p {
+            margin: 0;
+            color: #ddd;
+        }
+
+        .pesanan-total h3 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--krem);
+        }
+
+        #btn-reset {
+            background-color: white;
+            color: var(--cokelat-tua);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #btn-reset:hover {
+            background-color: var(--krem-tua);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--cokelat-gelap);
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STRUKTUR HTML -->
+    <header>
+        <div class="brand">
+            <h1>Kedai Kopi Senja</h1>
+            <!-- Slogan sesuai teks gambar -->
+            <p>Seduh hangat, warna senjamu</p>
+        </div>
+        <!-- 3 Tautan: Beranda, Menu, Kontak -->
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Menu</a>
+            <a href="#">Kontak</a>
+        </nav>
+    </header>
+
+    <!-- Main memuat 3 section berurutan -->
+    <main>
+
+        <!-- (1) Section Pengantar -->
+        <section class="pengantar">
+            <h2>Menu Pilihan Kami</h2>
+            <p>Menu racikan spesial dari biji kopi pilihan untuk menemani senja Anda.</p>
+        </section>
+
+        <!-- (2) Section Daftar Menu -->
+        <section class="daftar-menu">
+            <div class="filter-container">
+                <button class="btn-filter active" data-filter="semua">Semua</button>
+                <button class="btn-filter" data-filter="Kopi">Kopi</button>
+                <button class="btn-filter" data-filter="Makanan Ringan">Makanan Ringan</button>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Artikel Menu 1 -->
+                <article class="kartu-menu" data-kategori="Kopi" data-harga="22000">
+                    <span class="label-kategori">Kopi</span>
+                    <h3>Kopi Susu Senja</h3>
+                    <p>Espresso dengan susu segar dan gula aren.</p>
+                    <span class="harga">Rp 22.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+
+                <!-- Artikel Menu 2 -->
+                <article class="kartu-menu" data-kategori="Kopi" data-harga="18000">
+                    <span class="label-kategori">Kopi</span>
+                    <h3>Americano</h3>
+                    <p>Espresso ringan dengan air panas, tanpa gula.</p>
+                    <span class="harga">Rp 18.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+
+                <!-- Artikel Menu 3 -->
+                <article class="kartu-menu" data-kategori="Kopi" data-harga="25000">
+                    <span class="label-kategori">Kopi</span>
+                    <h3>Cappuccino</h3>
+                    <p>Perpaduan espresso dan busa susu yang lembut.</p>
+                    <span class="harga">Rp 25.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+
+                <!-- Artikel Menu 4 -->
+                <article class="kartu-menu" data-kategori="Makanan Ringan" data-harga="16000">
+                    <span class="label-kategori">Makanan Ringan</span>
+                    <h3>Roti Bakar Cokelat</h3>
+                    <p>Roti tebal dengan selai cokelat dan keju</p>
+                    <span class="harga">Rp 16.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+
+                <!-- Artikel Menu 5 -->
+                <article class="kartu-menu" data-kategori="Makanan Ringan" data-harga="15000">
+                    <span class="label-kategori">Makanan Ringan</span>
+                    <h3>Kentang Goreng</h3>
+                    <p>Kentang renyah dengan saus sambal.</p>
+                    <span class="harga">Rp 15.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+
+                <!-- Artikel Menu 6 -->
+                <article class="kartu-menu" data-kategori="Makanan Ringan" data-harga="14000">
+                    <span class="label-kategori">Makanan Ringan</span>
+                    <h3>Pisang Goreng</h3>
+                    <p>Pisang kepok goreng dengan taburan keju</p>
+                    <span class="harga">Rp 14.000</span>
+                    <button class="btn-pesan">Pesan</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- (3) Section Ringkasan Pesanan -->
+        <section class="ringkasan-pesanan">
+            <div class="pesanan-info">
+                <h3>Daftar Pesanan</h3>
+                <p>Jumlah Item: <span id="jumlah-item">0</span></p>
+            </div>
+            <div class="pesanan-total">
+                <h3>Total Harga: <span id="total-harga">Rp 0</span></h3>
+            </div>
+            <div class="pesanan-aksi">
+                <button id="btn-reset">Reset Pesanan</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Kedai Kopi Senja | Jl. Kopi No.1, Senja | Buka: 15.00 - 23.00</p>
+        <p>&copy; 2024 Kedai Kopi Senja. Hak cipta dilindungi.</p>
+    </footer>
+
+    <!-- JAVASCRIPT UNTUK INTERAKSI -->
+    <script>
+        // Logika Fungsionalitas Pesanan & Filter
+        let totalItem = 0;
+        let totalHarga = 0;
+
+        const elJumlahItem = document.getElementById('jumlah-item');
+        const elTotalHarga = document.getElementById('total-harga');
+        const btnReset = document.getElementById('btn-reset');
+        const tombolPesan = document.querySelectorAll('.btn-pesan');
+
+        // Fungsi format ke Rupiah
+        const formatRupiah = (angka) => {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        };
+
+        // Menambah Pesanan
+        tombolPesan.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const artikel = this.closest('.kartu-menu');
+                const harga = parseInt(artikel.getAttribute('data-harga'));
+
+                totalItem++;
+                totalHarga += harga;
+
+                elJumlahItem.textContent = totalItem;
+                elTotalHarga.textContent = formatRupiah(totalHarga);
+            });
+        });
+
+        // Reset Pesanan
+        btnReset.addEventListener('click', () => {
+            totalItem = 0;
+            totalHarga = 0;
+            elJumlahItem.textContent = totalItem;
+            elTotalHarga.textContent = "Rp 0";
+        });
+
+        // Filter Kategori
+        const btnFilters = document.querySelectorAll('.btn-filter');
+        const kartuMenus = document.querySelectorAll('.kartu-menu');
+
+        btnFilters.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Atur class aktif
+                btnFilters.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                kartuMenus.forEach(kartu => {
+                    if (filter === 'semua' || kartu.getAttribute('data-kategori') === filter) {
+                        kartu.style.display = 'flex';
+                    } else {
+                        kartu.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
